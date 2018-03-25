@@ -1,0 +1,65 @@
+<button id="elem">click me</button>
+<script>
+    function Button() {
+        this.clicked = false;
+        this.click = function () {
+            this.clicked = true;
+            console.log(this)
+            console.assert(button.clicked, 'The button has been clicked')
+        }
+    }
+
+    var button = new Button()
+    var elem = document.getElementById('elem')
+    elem.addEventListener('click', button.click)
+</script>
+
+<button id="test">click me</button>
+<script>
+    function Button() {
+        this.clicked = false;
+        this.click = () => {
+            this.clicked = true;
+            console.log(this)
+            console.assert(button.clicked, 'The button has been clicked')
+        }
+    }
+
+    var button = new Button()
+    var elem = document.getElementById('test')
+    elem.addEventListener('click', button.click)
+</script>
+
+<button id="global">click me</button>
+<script>
+    var button = {
+        clicked: false,
+        click : () => {
+            this.clicked = true;
+
+            console.assert(button.clicked, 'The button has been clicked')
+            console.assert(this === window, 'In arrow fn this === window')
+            console.assert(window.clicked,'clicked is stored in window')
+        }
+    }
+
+    
+    var elem = document.getElementById('global')
+    elem.addEventListener('click', button.click)
+</script>
+
+<button id="bound">click me</button>
+<script>
+    var button = {
+        clicked: false,
+        click: function()  {
+            this.clicked = true;
+            console.log(this)
+            console.assert(button.clicked, 'The button has been clicked')            
+        }
+    }
+
+
+    var elem = document.getElementById('bound')
+    elem.addEventListener('click', button.click.bind(button))
+</script>
