@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <body><div id="box1">First Box</div></body>
+
+</html>
+<script>
+ 
+    function animateIt(elementId) {
+           var elem = document.getElementById('box1')
+            var tick = 0
+        
+        var timer = setInterval(function () {
+            if (tick < 100) {
+                elem.style.left = elem.style.top = tick + 'px'
+                tick++
+            }
+            else {                
+                clearInterval(timer);
+                console.assert(tick === 100, 'tick accessed via closure');
+                console.assert(elem, 'elem accessed via closure');
+                console.assert(timer, 'tick accessed via closure');
+            }
+        }, 10);
+        
+    }
+    animateIt('box1')
+</script>
